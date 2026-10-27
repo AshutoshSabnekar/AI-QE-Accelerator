@@ -36,6 +36,7 @@ def test_multiply(a, b, expected):
         (5, 2, 2.5),
         (-10, 2, -5.0),
         (0, 5, 0.0),
+        (20, -4, -5.0),
     ],
 )
 def test_divide_valid_inputs(a, b, expected):
