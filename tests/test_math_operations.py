@@ -95,3 +95,9 @@ def test_square_root_valid_inputs(value, expected):
 def test_square_root_negative_input(value):
     with pytest.raises(ValueError, match="negative number"):
         square_root(value)
+
+
+@pytest.mark.parametrize("value", ["4", "Four", None, True])
+def test_square_root_invalid_input_type(value):
+    with pytest.raises(TypeError):
+        square_root(value)

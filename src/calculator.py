@@ -21,6 +21,8 @@ def power(a, b):
     return a ** b
 
 def square_root(a):
+    if isinstance(a, bool) or not isinstance(a, (int, float)):
+        raise TypeError("Square root input must be an integer or float")
     if a < 0:
         raise ValueError("Cannot take the square root of a negative number")
     return a ** 0.5
