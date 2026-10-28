@@ -15,7 +15,7 @@ def test_factorial_valid_inputs(n, expected):
     assert factorial(n) == expected
 
 
-@pytest.mark.parametrize("n", [-2, -10])
+@pytest.mark.parametrize("n", [-1, -2, -10])
 def test_factorial_negative_input(n):
     with pytest.raises(ValueError, match="negative number"):
         factorial(n)
