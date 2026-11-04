@@ -14,5 +14,7 @@ from src.calculator import add
         (0, 0, 0),
     ],
 )
+@pytest.mark.calculator
+@pytest.mark.addition
 def test_add(a, b, expected):
     assert add(a, b) == expected
