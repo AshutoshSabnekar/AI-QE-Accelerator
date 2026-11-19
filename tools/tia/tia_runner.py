@@ -269,6 +269,27 @@ def parse_pytest_results(output):
     return metrics
 
 
+def parse_test_cases(output):
+    """Extract individual test names and statuses from pytest -v output."""
+
+    test_cases = []
+    status_pattern = re.compile(
+        r"^([^\r\n]*::[^\r\n]*?)\s+"
+        r"(PASSED|FAILED|SKIPPED|XPASS|XFAIL)"
+        r"(?:\s+\[\s*\d+%\])?\s*$"
+    )
+
+    for line in output.splitlines():
+        match = status_pattern.match(line.strip())
+        if match:
+            test_cases.append({
+                "name": match.group(1).strip(),
+                "status": match.group(2),
+            })
+
+    return test_cases
+
+
 def extract_functions(tree):
     """
     Extract function definitions from an AST.
@@ -320,6 +341,7 @@ def run_tia(base_branch="main"):
             "selection_rate_percent": 0.0,
             "test_reduction_percent": 0.0,
             "test_metrics": {},
+            "test_cases": [],
             "pytest_return_code": 0,
             "success": True,
         }
@@ -365,6 +387,7 @@ def run_tia(base_branch="main"):
     test_result = run_impacted_tests(impacted_functions)
 
     metrics = parse_pytest_results(test_result["stdout"])
+    test_cases = parse_test_cases(test_result["stdout"])
 
     selected_tests = (
         metrics["passed"]
@@ -424,6 +447,7 @@ def run_tia(base_branch="main"):
         "selection_rate_percent": round(selection_rate, 2),
         "test_reduction_percent": round(reduction_rate, 2),
         "test_metrics": metrics,
+        "test_cases": test_cases,
         "pytest_return_code": test_result["return_code"],
         "success": test_result["return_code"] == 0,
     }
