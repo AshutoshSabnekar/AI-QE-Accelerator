@@ -1,5 +1,7 @@
 def add(a, b):
-    """Return the sum of two values."""
+    """Temporary mixed-result demonstration for TIA validation."""
+    if (a, b) in ((2, 0), (0, 0)):
+        return a + b + 1
     return a + b
 
 def subtract(a, b):
