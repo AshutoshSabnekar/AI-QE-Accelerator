@@ -274,15 +274,18 @@ def parse_test_cases(output):
 
     test_cases = []
     status_pattern = re.compile(
-        r"^(.+::[^\s].*?)\s+(PASSED|FAILED|SKIPPED|XPASS|XFAIL)(?:\s|$)",
-        re.MULTILINE,
+        r"^([^\r\n]*::[^\r\n]*?)\s+"
+        r"(PASSED|FAILED|SKIPPED|XPASS|XFAIL)"
+        r"(?:\s+\[\s*\d+%\])?\s*$"
     )
 
-    for test_name, status in status_pattern.findall(output):
-        test_cases.append({
-            "name": test_name.strip(),
-            "status": status,
-        })
+    for line in output.splitlines():
+        match = status_pattern.match(line.strip())
+        if match:
+            test_cases.append({
+                "name": match.group(1).strip(),
+                "status": match.group(2),
+            })
 
     return test_cases
 
