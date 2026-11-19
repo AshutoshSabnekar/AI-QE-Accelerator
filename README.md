@@ -1,41 +1,63 @@
 # AI-QE-Accelerator
 
-An AI Quality Engineering portfolio project focused on evaluating the quality, reliability, and testability of AI-powered applications.
+An AI Quality Engineering portfolio project focused on building practical tools and techniques for evaluating the quality, reliability, and testability of software and AI-powered applications.
+
+The project evolves incrementally through hands-on implementation, automated testing, experimentation, and documented engineering results.
 
 ## Objectives
 
 - Build maintainable automated tests using Python and pytest.
-- Explore evaluation techniques for Large Language Model (LLM) applications.
+- Develop reusable quality engineering utilities.
+- Explore test optimization techniques such as Test Impact Analysis (TIA).
+- Evaluate the quality and reliability of Large Language Model (LLM) applications.
 - Test Retrieval-Augmented Generation (RAG) workflows and AI agents.
 - Develop repeatable quality checks suitable for CI/CD pipelines.
 - Document test strategies, evaluation results, and engineering trade-offs.
 
-## Planned Technology Stack
+## Technology Stack
+
+### Currently Implemented
 
 - Python
 - pytest
 - Git and GitHub
+- AST-based analysis
+- pytest markers
+- Test Impact Analysis
+
+### Planned
+
 - API testing tools
 - LLM evaluation frameworks
-- CI/CD automation
+- Prompt testing
+- RAG evaluation
+- AI agent testing
+- CI/CD integration
+- AI quality metrics and observability
 
-The stack will be introduced incrementally as the project develops.
+Technologies will be introduced incrementally as the project develops.
 
 ## Project Structure
 
 ```text
 AI-QE-Accelerator/
-├── docs/       # Design notes and test strategy
-├── src/        # Reusable project code
-├── tests/      # Automated tests
+├── docs/
+│   └── tia-implementation-report.md
+├── src/
+│   └── calculator.py
+├── tests/
+│   ├── test_addition.py
+│   ├── test_factorial.py
+│   └── test_math_operations.py
+├── tools/
+│   └── tia/
+│       ├── __init__.py
+│       ├── dependency_map.py
+│       └── tia_runner.py
+├── .github/
+│   └── workflows/
+│       └── python-tests.yml
 ├── .gitignore
-└── README.md
-```
-
-## Status
-
-Initial project setup. Implementation and evaluation capabilities will be added incrementally.
-
-## Learning Approach
-
-Each capability will be developed through practical exercises, automated tests, documented results, and engineering-focused review.
+├── README.md
+├── pytest.ini
+└── requirements.txt
