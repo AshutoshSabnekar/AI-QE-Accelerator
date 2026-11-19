@@ -20,17 +20,24 @@ def modulus(a, b):
 def power(a, b):
     return a ** b
 
+def validate_number(value, function_name, allowed_types=(int, float)):
+    if isinstance(value, bool) or not isinstance(value, allowed_types):
+        expected_type = (
+            "a non-negative integer"
+            if allowed_types == (int,)
+            else "an integer or float"
+        )
+        raise TypeError(f"{function_name} input must be {expected_type}")
+
 def square_root(a):
-    if isinstance(a, bool) or not isinstance(a, (int, float)):
-        raise TypeError("Square root input must be an integer or float")
+    validate_number(a, "Square root")
     if a < 0:
         raise ValueError("Cannot take the square root of a negative number")
     return a ** 0.5
 
 def factorial(n):
     """Return n! for a non-negative integer."""
-    if isinstance(n, bool) or not isinstance(n, int):
-        raise TypeError("Factorial input must be a non-negative integer")
+    validate_number(n, "Factorial", allowed_types=(int,))
     if n < 0:
         raise ValueError("Cannot take the factorial of a negative number")
     if n == 0:

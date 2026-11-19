@@ -118,5 +118,7 @@ def test_square_root_negative_input(value):
 @pytest.mark.calculator
 @pytest.mark.square_root
 def test_square_root_invalid_input_type(value):
-    with pytest.raises(TypeError):
+    with pytest.raises(
+        TypeError, match=r"^Square root input must be an integer or float$"
+    ):
         square_root(value)
